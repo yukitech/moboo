@@ -37,7 +37,7 @@ idf.py -p $PORT monitor | while read -r line; do
     echo "$current_time,$line" >> $OUTPUT_FILE
     declare -i file_len=`cat $OUTPUT_FILE | wc -l`
     if [ "$file_len" -gt 280 ]; then
-      curl -X 'POST' 'http://0.0.0.0:8000/uploadfile' -H 'accept: application/json' -H 'Content-Type: multipart/form-data' -F 'file=@"'$OUTPUT_FILE'";type=text/plain'
+      curl -X 'POST' 'http://0.0.0.0:8000/predict' -H 'accept: application/json' -H 'Content-Type: multipart/form-data' -F 'file=@"'$OUTPUT_FILE'";type=text/plain' &
       #rm $OUTPUT_FILE
       break
     fi
